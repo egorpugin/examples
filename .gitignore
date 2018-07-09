@@ -1,0 +1,12 @@
+
+*.dll
+*.exe
+*.lnk
+
+.cppan
+.s
+
+bin*
+build*
+win*
+
