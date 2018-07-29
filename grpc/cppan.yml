@@ -1,0 +1,27 @@
+projects:
+    proto:
+        files: helloworld.proto
+        type: lib
+        static_only: true
+        custom: true
+        dependencies:
+            - pvt.cppan.demo.google.protobuf.protoc: "*"
+            - pvt.cppan.demo.google.protobuf.protobuf: "*"
+            - pvt.cppan.demo.google.grpc.grpcpp_unsecure: 1
+            - name: pvt.cppan.demo.google.grpc.grpc_cpp_plugin
+              version: 1
+              ref: grpc_cpp_plugin
+        post_sources: |
+            cppan_grpc(${SDIR}/helloworld.proto)
+
+    server:
+        files: greeter_server.cc
+        dependencies:
+            - proto
+
+    client:
+        files: greeter_client.cc
+        dependencies:
+            - proto
+
+
