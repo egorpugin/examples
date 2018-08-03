@@ -1,3 +1,8 @@
+#local_settings:
+    #builds:
+        #vs_release:
+            #generator: Visual Studio 15 2017 Win64
+
 projects:
     proto:
         files: helloworld.proto
@@ -7,19 +12,21 @@ projects:
         dependencies:
             - pvt.cppan.demo.google.protobuf.protoc: "*"
             - pvt.cppan.demo.google.protobuf.protobuf: "*"
-            - pvt.cppan.demo.google.grpc.grpcpp_unsecure: 1
-            - name: pvt.cppan.demo.google.grpc.grpc_cpp_plugin
-              version: 1
-              ref: grpc_cpp_plugin
+            - pvt.cppan.demo.google.grpc.grpcpp: 1
+            #- pvt.cppan.demo.google.grpc.grpcpp_unsecure: 1
+            - pvt.cppan.demo.google.grpc.grpc_cpp_plugin: 1
+            - pvt.egorpugin.primitives.filesystem: master
         post_sources: |
-            cppan_grpc(${SDIR}/helloworld.proto)
+            gen_grpc(${SDIR}/helloworld.proto)
 
     server:
+        c++: 17
         files: greeter_server.cc
         dependencies:
             - proto
 
     client:
+        c++: 17
         files: greeter_client.cc
         dependencies:
             - proto
