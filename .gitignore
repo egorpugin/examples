@@ -5,6 +5,7 @@
 
 .cppan
 .s
+.sw
 
 bin*
 build*

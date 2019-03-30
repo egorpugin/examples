@@ -1,8 +1,12 @@
 /*
 c++: 17
 dependencies:
-    - pvt.cppan.demo.gnu.gpg.gpgme.gpgmecpp: 1
-    - pvt.egorpugin.primitives.sw.main: master
+    - org.sw.demo.gnu.gpg.gpgme.gpgmecpp: 1
+    - pub.egorpugin.primitives.sw.main: master
+
+    # cppan, old
+    #- pvt.cppan.demo.gnu.gpg.gpgme.gpgmecpp: 1
+    #- pvt.egorpugin.primitives.sw.main: master
 */
 
 #include <gpgme.h>
@@ -10,6 +14,8 @@ dependencies:
 
 int main(int argc, char **argv)
 {
+    // set it to gpg path on the first run
+    // if gpg was not run on the system before
     gpgme_set_global_flag("w32-inst-dir", ".");
 
     gpgme_check_version("1.11.1");
