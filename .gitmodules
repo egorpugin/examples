@@ -2,5 +2,5 @@
 	path = webcam
 	url = https://github.com/cppan/webcam_demo
 [submodule "tesseract"]
-	path = tesseract
+	path = tesseract/cppan
 	url = https://github.com/cppan/tesseract_example
