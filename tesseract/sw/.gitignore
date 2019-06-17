@@ -1,0 +1,8 @@
+build*
+bin*
+cppan
+win*
+*.lnk
+*.exe
+.cppan
+.sw
