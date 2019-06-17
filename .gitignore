@@ -11,3 +11,5 @@ bin*
 build*
 win*
 
+*.sig
+*.txt

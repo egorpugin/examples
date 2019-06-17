@@ -12,6 +12,9 @@ dependencies:
 #include <gpgme.h>
 #include <primitives/sw/main.h>
 
+#define GPGMEPP_DEPRECATED
+#include <context.h>
+
 int main(int argc, char **argv)
 {
     // set it to gpg path on the first run
@@ -23,7 +26,6 @@ int main(int argc, char **argv)
     //gpgme_ctx_t ctx;
     //auto err = gpgme_new(&ctx);
     //err = gpgme_op_keylist_start(ctx, "*", 0);
-
 
     gpgme_ctx_t ctx;
     gpgme_key_t key;
@@ -45,12 +47,20 @@ int main(int argc, char **argv)
             putchar('\n');
             gpgme_key_release(key);
         }
+
         gpgme_release(ctx);
     }
     if (gpg_err_code(err) != GPG_ERR_EOF)
     {
         fprintf(stderr, "can not list keys: %s\n", gpgme_strerror(err));
     }
+
+
+    auto c = GpgME::Context::create(GpgME::OpenPGP);
+    auto e = c->startKeyListing("");
+    c->nextKey(e).;
+
+    //gpgme_op_verify(ctx, )
 
     return 0;
 }
