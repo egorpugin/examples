@@ -1,6 +1,7 @@
 /*
 dependencies:
-    org.sw.demo.google.tesseract.libtesseract: master
+    - org.sw.demo.danbloomberg.leptonica
+    - org.sw.demo.google.tesseract.libtesseract-master
 */
 
 #include <iostream>
