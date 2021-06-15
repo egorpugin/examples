@@ -1,6 +1,6 @@
 /*
 dependencies:
-    pvt.cppan.demo.arvidn.libtorrent: 1
+    org.sw.demo.arvidn.libtorrent: 1
 */
 
 /*
@@ -24,17 +24,16 @@ options:
 #include <libtorrent/extensions/ut_pex.hpp>
 
 #include <fstream>
+#include <iostream>
 
-using namespace libtorrent;
-
-void ct()
+void create_torrent()
 {
-    file_storage fs;
+    libtorrent::file_storage fs;
 
     // recursively adds files in directories
     add_files(fs, "dir");
 
-    create_torrent t(fs);
+    libtorrent::create_torrent t(fs);
     t.add_tracker("udp://public.popcorn-tracker.org:6969/announce");
     t.set_creator("libtorrent example");
 
@@ -47,23 +46,23 @@ void ct()
 
 void pub()
 {
-    settings_pack p;
+    libtorrent::settings_pack p;
 
     //p.set_bool(settings_pack::enable_dht, true);
     //p.set_bool(settings_pack::enable_lsd, true);
 
-    p.set_str(settings_pack::dht_bootstrap_nodes,
+    p.set_str(libtorrent::settings_pack::dht_bootstrap_nodes,
         "dht.libtorrent.org:25401,router.bittorrent.com:6881,router.utorrent.com:6881,dht.transmissionbt.com:6881,dht.aelitis.com:6881");
 
     p.set_int(lt::settings_pack::alert_mask, lt::alert::status_notification | lt::alert::error_notification
         //| lt::alert::all_categories
     );
 
-    session s(p);
+    libtorrent::session s(p);
     //s.add_extension(&create_ut_pex_plugin);
 
-    add_torrent_params params;
-    error_code ec;
+    libtorrent::add_torrent_params params;
+    //error_code ec;
     //parse_magnet_uri("magnet:?xt=urn:btih:aa1834038d772240929cd18a75187684863255f7", params, ec);
     //parse_magnet_uri("magnet:?xt=urn:btih:aa1834038d772240929cd18a75187684863255f7&tr=udp%3a%2f%2ftracker.coppersurfer.tk%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.open-internet.nl%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.skyts.net%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.piratepublic.com%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.opentrackr.org%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.internetwarriors.net%3a1337%2fannounce&tr=udp%3a%2f%2f9.rarbg.to%3a2710%2fannounce&tr=udp%3a%2f%2fpublic.popcorn-tracker.org%3a6969%2fannounce&tr=udp%3a%2f%2fwambo.club%3a1337%2fannounce&tr=udp%3a%2f%2ftracker4.itzmx.com%3a2710%2fannounce&tr=udp%3a%2f%2ftracker1.wasabii.com.tw%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.zer0day.to%3a1337%2fannounce&tr=udp%3a%2f%2ftracker.xku.tv%3a6969%2fannounce&tr=udp%3a%2f%2ftracker.vanitycore.co%3a6969%2fannounce&tr=udp%3a%2f%2fopen.facedatabg.net%3a6969%2fannounce&tr=udp%3a%2f%2fmgtracker.org%3a6969%2fannounce&tr=udp%3a%2f%2fipv4.tracker.harry.lu%3a80%2fannounce&tr=udp%3a%2f%2finferno.demonoid.pw%3a3418%2fannounce&tr=udp%3a%2f%2ftracker.tiny-vps.com%3a6969%2fannounce&tr=udp%3a%2f%2fp4p.arenabg.com%3a1337%2fannounce", params, ec);
     //parse_magnet_uri("magnet:?xt=urn:btih:615e18333efdafac0458f9bad0c72ccc222045f1&dn=sw.tar.gz&tr=udp%3a%2f%2fpublic.popcorn-tracker.org%3a6969%2fannounce", params, ec);
@@ -103,7 +102,7 @@ done:
 
 int main()
 {
-    //ct();
+    //create_torrent();
     pub();
 
     return 0;
