@@ -1,21 +1,24 @@
-#pragma sw require header org.sw.demo.google.grpc.grpc_cpp_plugin
-#pragma sw require pub.egorpugin.primitives.filesystem-master
+#pragma sw require header org.sw.demo.google.grpc.cpp.plugin
+#pragma sw require pub.egorpugin.primitives.filesystem
 
 void build(Solution &s)
 {
     auto &p = s.addStaticLibrary("proto");
-    gen_grpc("org.sw.demo.google.protobuf"_dep, "org.sw.demo.google.grpc.grpc_cpp_plugin"_dep,
-        p, p.SourceDir / "helloworld.proto", true);
-    p.Public += "org.sw.demo.google.grpc.grpcpp"_dep;
-    p.Public += "pub.egorpugin.primitives.filesystem-master"_dep;
+    p += cpp20;
+    ProtobufData d;
+    d.public_protobuf = true;
+    gen_grpc_cpp("org.sw.demo.google.protobuf"_dep, "org.sw.demo.google.grpc.cpp.plugin"_dep,
+        p, p.SourceDir / "helloworld.proto", d);
+    p.Public += "org.sw.demo.google.grpc.cpp"_dep;
+    p.Public += "pub.egorpugin.primitives.filesystem"_dep;
 
     auto &srv = s.addExecutable("server");
-    srv.CPPVersion = CPPLanguageStandard::CPP17;
+    srv += cpp20;
     srv += "greeter_server.cc";
     srv += p;
 
     auto &c = s.addExecutable("client");
-    c.CPPVersion = CPPLanguageStandard::CPP17;
+    c += cpp20;
     c += "greeter_client.cc";
     c += p;
 }
